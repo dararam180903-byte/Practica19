@@ -3,85 +3,53 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
-    <!-- PWA Meta Tags -->
-    <meta name="application-name" content="Ruta de Clientes">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <meta name="apple-mobile-web-app-title" content="RutaClientes">
-    <meta name="description" content="Aplicación para gestionar rutas de visitas a clientes">
-    <meta name="format-detection" content="telephone=no">
-    <meta name="mobile-web-app-capable" content="yes">
-    <meta name="msapplication-TileColor" content="#667eea">
-    <meta name="msapplication-tap-highlight" content="no">
-    <meta name="theme-color" content="#667eea">
 
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22 fill=%22%23667eea%22>🗺️</text></svg>">
-    
-    <!-- Apple Touch Icons -->
+    <!-- PWA -->
+    <meta name="application-name" content="Ruta de Clientes">
+    <meta name="theme-color" content="#667eea">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-title" content="RutaClientes">
+
+    <!-- Icons -->
+    <link rel="icon" href="data:image/svg+xml,
+        <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'>
+            <text y='.9em' font-size='90' fill='%23667eea'>🗺️</text>
+        </svg>">
+
     <link rel="apple-touch-icon" href="icon-152x152.png">
     <link rel="apple-touch-icon" sizes="152x152" href="icon-152x152.png">
     <link rel="apple-touch-icon" sizes="180x180" href="icon-180x180.png">
     <link rel="apple-touch-icon" sizes="167x167" href="icon-167x167.png">
-    
-    <!-- PWA Manifest -->
-    <link rel="manifest" href="./manifest.json">
 
-      <!-- Colores del navegador -->
-  <meta name="theme-color" content="#667eea">
-    
-    <!-- Favicon -->
-    <link rel="icon" type="image/png" sizes="32x32" href="icon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="icon-16x16.png">
-    
+    <link rel="manifest" href="manifest.json">
+
     <title>Ruta de Clientes</title>
-    
-    <!-- Bootstrap CSS -->
+
+    <!-- CSS Libraries -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-    
-    <!-- Leaflet CSS -->
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css">
-    
-    <!-- Font Awesome para iconos -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
+    <!-- Custom CSS -->
     <link rel="stylesheet" href="./css/estilo.css">
-
-    <!-- Después de Leaflet CSS -->
-
-    
-    
 </head>
+
 <body>
+
     <!-- Loading Spinner -->
-<div id="loadingSpinner" style="display: none;">
-    <div class="spinner"></div>
-</div>
-    
+    <div id="loadingSpinner" style="display:none;">
+        <div class="spinner"></div>
+    </div>
+
     <!-- Offline Warning -->
     <div id="offlineWarning">
         <i class="fas fa-wifi-slash me-2"></i> Estás offline. Algunas funciones pueden estar limitadas.
     </div>
-    
-    <!-- Install Banner -->
-    <div id="installBanner">
-        <div class="container d-flex justify-content-between align-items-center">
-            <div>
-                <i class="fas fa-download me-2"></i>
-                <strong>Instalar App</strong>
-                <div class="small">Para una mejor experiencia, instala esta aplicación</div>
-            </div>
-            <div>
-                <button id="installBtn" class="btn btn-light btn-sm me-2">
-                    Instalar
-                </button>
-                <button id="closeBanner" class="btn-close btn-close-white"></button>
-            </div>
-        </div>
-    </div>
-    
+
     <div class="container py-4">
-        <!-- Encabezado -->
+
+        <!-- TITLE -->
         <div class="row mb-4">
             <div class="col-12 text-center">
                 <h1 class="display-5 fw-bold mb-3">Ruta de Clientes</h1>
@@ -90,7 +58,8 @@
         </div>
 
         <div class="row">
-            <!-- Formulario para agregar clientes -->
+
+            <!-- FORM REGISTRO -->
             <div class="col-lg-4 mb-4">
                 <div class="card h-100">
                     <div class="card-header bg-white border-0 pb-0">
@@ -98,19 +67,21 @@
                             <i class="fas fa-user-plus me-2"></i>Agregar Nuevo Cliente
                         </h4>
                     </div>
+
                     <div class="card-body pt-0">
                         <form id="registroForm" class="row g-3">
+
                             <div class="col-12">
                                 <label for="nombre" class="form-label">Nombre Completo *</label>
-                                <input id="nombre" type="text" class="form-control" placeholder="Ej: Gerardo Villarreal" required>
+                                <input id="nombre" type="text" class="form-control" required>
                             </div>
-                            
+
                             <div class="col-12">
                                 <label for="telefono" class="form-label">Número de Teléfono *</label>
-                                <input id="telefono" type="tel" class="form-control" placeholder="Ej: 8123456789" required>
-                                <small class="text-muted">Formato: 10 dígitos sin espacios</small>
+                                <input id="telefono" type="tel" class="form-control" required>
+                                <small class="text-muted">10 dígitos sin espacios</small>
                             </div>
-                            
+
                             <div class="col-12">
                                 <label for="zona" class="form-label">Zona *</label>
                                 <select id="zona" class="form-select" required>
@@ -122,49 +93,45 @@
                                     <option value="Zona Poniente">Zona Poniente</option>
                                 </select>
                             </div>
-                            
+
                             <div class="col-md-6">
                                 <label for="lat" class="form-label">Latitud *</label>
-                                <input id="lat" type="number" step="any" class="form-control" placeholder="25.6866" required>
+                                <input id="lat" type="number" step="any" class="form-control" required>
                             </div>
-                            
+
                             <div class="col-md-6">
                                 <label for="ing" class="form-label">Longitud *</label>
-                                <input id="ing" type="number" step="any" class="form-control" placeholder="-100.3161" required>
+                                <input id="ing" type="number" step="any" class="form-control" required>
                             </div>
-                            
-                            <div class="col-12">
-                                <small class="text-muted">* Campos obligatorios</small>
-                            </div>
-                            
+
                             <div class="col-12 text-center pt-3">
                                 <button id="btnAgregar" type="submit" class="btn btn-primary w-100">
                                     <i class="fas fa-plus-circle me-2"></i>Agregar Cliente
                                 </button>
                             </div>
+
                         </form>
                     </div>
                 </div>
             </div>
 
-            <!-- Lista de clientes disponibles -->
+            <!-- CLIENTES DISPONIBLES -->
             <div class="col-lg-4 mb-4">
                 <div class="card h-100">
                     <div class="card-header bg-white border-0 pb-0">
                         <h4 class="card-title mb-4">
                             <i class="fas fa-users me-2"></i>Clientes Disponibles
                         </h4>
-                        <p class="text-muted mb-0">Haz clic para seleccionar/deseleccionar. <strong>Consejo:</strong> Selecciona los clientes en el orden en que los visitarías.</p>
+                        <p class="text-muted mb-0">Selecciona en el orden de visita.</p>
                     </div>
+
                     <div class="card-body pt-0">
-                        <ul id="clientesRuta" class="list-group list-group-flush">
-                            <!-- Los clientes se cargarán aquí -->
-                        </ul>
+                        <ul id="clientesRuta" class="list-group list-group-flush"></ul>
                     </div>
                 </div>
             </div>
 
-            <!-- Mapa y ruta -->
+            <!-- MAPA Y RUTA -->
             <div class="col-lg-4">
                 <div class="card h-100">
                     <div class="card-header bg-white border-0 pb-0">
@@ -172,116 +139,50 @@
                             <i class="fas fa-map-marked-alt me-2"></i>Mapa de Ruta
                         </h4>
                     </div>
+
                     <div class="card-body pt-0">
-                        <!-- Mapa -->
-                        <div id="mapaRuta" class="map-container mb-4" style="height: 300px;"></div>
-                        
-                        <!-- Distancia total -->
+
+                        <!-- MAPA -->
+                        <div id="mapaRuta" class="map-container mb-4" style="height:300px;"></div>
+
+                        <!-- DISTANCIA -->
                         <div class="d-flex justify-content-between align-items-center mb-4">
                             <div>
                                 <h5 class="mb-1">Distancia total:</h5>
-                                <div class="distancia-total" id="distanciaTotal">0 km</div>
+                                <div id="distanciaTotal" class="distancia-total">0 km</div>
                             </div>
+
                             <button id="btnLimpiarRuta" class="btn btn-danger">
                                 <i class="fas fa-trash-alt me-2"></i>Limpiar Ruta
                             </button>
                         </div>
-                        
-                        <!-- Ruta construida -->
+
+                        <!-- LISTA DE RECORRIDO -->
                         <div id="listaRecorrido">
                             <p class="text-muted text-center mb-0">No hay clientes seleccionados</p>
                         </div>
+
                     </div>
                 </div>
             </div>
+
         </div>
     </div>
-
-    <!-- Mensaje de conexión -->
-<div id="conexionMensaje" style="
-    position: fixed;
-    top: 20px;
-    right: 20px;
-    padding: 12px 20px;
-    border-radius: 8px;
-    font-weight: bold;
-    z-index: 9999;
-    display: none;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-    transition: all 0.3s ease;
-">
-    <i class="fas fa-wifi me-2"></i>
-    <span id="conexionTexto"></span>
-</div>
-
- <!-- Banner de instalación -->
-  <div id="installBanner" style="
-    display: none;
-    position: fixed;
-    bottom: 20px;
-    left: 50%;
-    transform: translateX(-50%);
-    background: white;
-    border-radius: 12px;
-    padding: 15px;
-    box-shadow: 0 0 12px rgba(0,0,0,0.2);
-    text-align: center;
-  ">
-    <p>Puedes instalar esta app</p>
-    <button id="btnInstall" 
-      style="background:#667eea;color:white;padding:10px 20px;border-radius:10px;border:none;">
-      Instalar
-    </button>
-    <button id="btnCancel" style="border:none;background:none;color:#555;margin-left:10px;">
-      Cancelar
-    </button>
-  </div>
-
 
 
     <!-- Scripts -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
-    <script src="./js/app.js"></script>
-    
-    <!-- PWA Script -->
-  
-<script>
-    // Registro del Service Worker
-    //if ("serviceWorker" in navigator) {
-      //navigator.serviceWorker.register("./service-worker.js")
-        //.then(() => console.log("Service Worker registrado"))
-        //.catch(err => console.log("Error SW:", err));
-    //}
+    <script src="js/app.js"></script>
 
-    // Lógica de instalación
-    let deferredPrompt;
-    const banner = document.getElementById("installBanner");
-    const btnInstall = document.getElementById("btnInstall");
-    const btnCancel = document.getElementById("btnCancel");
+    <!-- Registrar Service Worker -->
+    <script>
+        if ("serviceWorker" in navigator) {
+            navigator.serviceWorker.register("/service-worker.js")
+            .then(() => console.log("Service Worker registrado"))
+            .catch(err => console.log("Error SW:", err));
+        }
+    </script>
 
-    window.addEventListener("beforeinstallprompt", (e) => {
-      e.preventDefault();
-      deferredPrompt = e;
-      banner.style.display = "block";
-    });
-
-    btnInstall.addEventListener("click", () => {
-      banner.style.display = "none";
-      deferredPrompt.prompt();
-
-      deferredPrompt.userChoice.then(() => {
-        deferredPrompt = null;
-      });
-    });
-
-    btnCancel.addEventListener("click", () => {
-      banner.style.display = "none";
-    });
-  </script>
 </body>
-
 </html>
-
-
-
